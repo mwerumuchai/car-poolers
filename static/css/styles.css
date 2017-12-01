@@ -1,0 +1,36 @@
+body {
+  background-color: #fafafa;
+  padding: 0;
+}
+
+#homepage {
+  padding-top: 36px;
+}
+
+#homepagel {
+  padding-top: 85px;
+}
+
+#navigation {
+  background-color: #fff;
+  border: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, .0975);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  -webkit-transition: height .2s ease-in-out;
+  transition: height .2s ease-in-out;
+  height: 77px;
+}
+
+#logo {
+  padding-left: 450px;
+}
+
+div.help-block {
+  display: none;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
