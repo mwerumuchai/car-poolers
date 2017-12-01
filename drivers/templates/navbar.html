@@ -1,0 +1,61 @@
+{% load bootstrap3 %} {% load static %}
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width = device-width, initial-scale = 1"> {% block styles %} {% bootstrap_css%}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse" id="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header" id="logo">
+          <a class="navbar-brand" href="{% url 'driverindex'%}">Car Poolers</a>
+        </div>
+        <!-- Adding a search form -->
+        <div class="col-sm-4 col-md-4 navbar-right">
+          <form action="#" class="navbar-form" id="search">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <h6 class="text-center">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button><input type="text" class="form-control" placeholder="Search" name="article"></h6>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- end of search form     -->
+        <!-- login -->
+        <div class="navbar-right" id="login">
+          {% if user.is_authenticated %}
+          <ul>
+            <ul class="dropdown">
+              <!-- <h6 class="profile"><a class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false" href="{% url 'index'%}">
+                <img src="/static/img/profile.png" alt="logo" width="59" height="59"><span class="caret"></span></h6></a> -->
+              <a href="/profiles" class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false">{{user.username}}
+                          <span class="caret"></span>
+                      </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="{% url 'uploadpost'%}">Upload Post</a>
+                </li>
+                <a href="/logout">Logout</a>
+                </li>
+              </ul>
+            </ul>
+          </ul>
+          {% else %}
+          <li>
+            <a class='btn btn-default' href="/accounts/login">Login</a>
+          </li>
+
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+  </body>
+
+</html>
