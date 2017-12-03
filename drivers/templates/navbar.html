@@ -1,61 +1,75 @@
-{% load bootstrap3 %} {% load static %}
-<!DOCTYPE html>
-<html>
+{% load bootstrap3 %} {% load static %} {% block title %} {{title}} {% endblock %} {% block styles%} {% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> {% endblock %} {% block body %}
+<!-- Navigation -->
+<header class="site-header navbar-transparent">
+  <nav class="navbar navbar-default">
+    <div class="container">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewpoint" content="width = device-width, initial-scale = 1"> {% block styles %} {% bootstrap_css%}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
-  </head>
+      <!-- Toggle buttons and brand -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+            <span class="glyphicon glyphicon-option-vertical"></span>
+          </button>
 
-  <body>
-    <nav class="navbar navbar-inverse" id="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header" id="logo">
-          <a class="navbar-brand" href="{% url 'driverindex'%}">Car Poolers</a>
-        </div>
-        <!-- Adding a search form -->
-        <div class="col-sm-4 col-md-4 navbar-right">
-          <form action="#" class="navbar-form" id="search">
-            <div class="input-group">
-              <div class="input-group-btn">
-                <h6 class="text-center">
-                <button class="btn btn-default" type="submit">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button><input type="text" class="form-control" placeholder="Search" name="article"></h6>
+        <button type="button" class="navbar-toggle for-sidebar" data-toggle="offcanvas">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="/"><img src="/static/img/logo.png" alt="logo" width="60"></a>
+        <a class="navbar-brand" href="/">
+            <i class="/"></i>Pool My Ride
+          </a>
+      </div>
+      <!-- END Toggle buttons and brand -->
+
+      <!-- Top navbar -->
+      <div id="navbar" class="navbar-collapse collapse" aria-expanded="true" role="banner">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <form class="navbar-form" role="search">
+              <div class="input-group has-feedback">
+                <input type="text" class="form-control" placeholder="Search..">
+                <i class="form-control-feedback glyphicon glyphicon-search"></i>
               </div>
-            </div>
-          </form>
-        </div>
-        <!-- end of search form     -->
-        <!-- login -->
-        <div class="navbar-right" id="login">
+            </form>
+          </li>
+          <!-- action="/" -->
           {% if user.is_authenticated %}
-          <ul>
-            <ul class="dropdown">
-              <!-- <h6 class="profile"><a class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false" href="{% url 'index'%}">
-                <img src="/static/img/profile.png" alt="logo" width="59" height="59"><span class="caret"></span></h6></a> -->
-              <a href="/profiles" class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false">{{user.username}}
-                          <span class="caret"></span>
-                      </a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="{% url 'uploadpost'%}">Upload Post</a>
-                </li>
-                <a href="/logout">Logout</a>
-                </li>
-              </ul>
-            </ul>
-          </ul>
+          <li>
+            <a href="{% url 'about'%}">About</a>
+          </li>
+          <li>
+            <a href="/accounts/register" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
+          </li>
+          <li>
+            <a href="/">{{ user.username }}</a>
+          </li>
+          <li>
+            <a href="{% url 'profiles' user.username %}">Profile</a>
+          </li>
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
           {% else %}
           <li>
-            <a class='btn btn-default' href="/accounts/login">Login</a>
+            <a href="{% url 'about'%}">About</a>
           </li>
-
+          <li>
+            <a href="/accounts/register" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
+          </li>
+          <li>
+            <a class='btn btn-primary btn-sm' href="/accounts/login">Login</a>
+          </li>
+          <li></li>
           {% endif %}
-        </div>
+        </ul>
       </div>
-    </nav>
-  </body>
+      <!-- END Top navbar -->
+    </div>
+  </nav>
+  <!-- END Top navbar & branding -->
 
-</html>
+</header>
+{% endblock %}
