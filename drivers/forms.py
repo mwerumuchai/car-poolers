@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Request,CarSharing
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -10,6 +10,16 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('profile_pic','website', 'bio', 'location', 'phone_number')
+        fields = ('profile_pic','website', 'bio', 'location', 'phone_number','sex')
 
         exclude = ['comment',]
+
+class RequestRideForm(forms.ModelForm):
+    class Meta:
+        model = Request
+        fields = ('destination','pick_up_point')
+
+class CarSharingForm(forms.ModelForm):
+    class Meta:
+        model = CarSharing
+        fields =('start','destination','start_time','arrival_time')
