@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import transaction
 from django.http import Http404
-from .forms import UserForm,ProfileForm,CarSharingForm
-from .models import Profile,Request
+from .forms import UserForm,ProfileForm,RequestRideForm
+from .models import DriverProfile,Request,CarSharing
 import datetime as dt
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -15,14 +15,7 @@ from django.core.urlresolvers import reverse
 # Create your views here.
 @login_required(login_url='/accounts/register/')
 def d_index(request):
-    return render(request, 'd-index.html')
-
-@login_required(login_url='/accounts/register/')
-def d_homepage(request):
-    return render(request, 'd-homepage.html')
-
-def logout(request):
-    return render(request, 'd-index.html')
+    return render(request, 'drivers/d-index.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -38,7 +31,7 @@ def update_profile(request,username):
             user_form.save()
             profile_form.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('home')
+            return redirect('profiles')
         else:
             messages.error(request, ('Please correct the error below.'))
     else:
@@ -53,7 +46,7 @@ def update_profile(request,username):
 def profile(request,username):
     try:
         user = User.objects.get(username=username)
-        profile_pic = Profile.objects.filter(user_id=user).all().order_by('-id')
+        profile_pic = DriverProfile.objects.filter(user_id=user).all().order_by('-id')
     except ObjectDoesNotExist:
         raise Http404()
 
@@ -64,9 +57,9 @@ def profile(request,username):
 def carshare(request,user_id):
     user = User.objects.get(pk=user_id)
     form = CarSharing(request.POST)
-
-    if user.user.type == 'Rider':
-        raise Http404
+    #
+    # if user.user.type == 'Rider':
+    #     raise Http404
     carsharing = CarDetails.objects.get(pk=cardetails_id, user=user)
 
     if request.method == 'POST':
@@ -94,8 +87,8 @@ def carshare(request,user_id):
 def see_car_shared(request,user_id):
     user = User.objects.get(pk=user_id)
 
-    if user.user.type == 'Rider':
-        raise Http404
+    # if user.user.type == 'Rider':
+    #     raise Http404
     rides = CarDetails.objects.filter(user=user).order_by('pk').reverse()
     shared = CarSharing.objects.filter(user=user).order_by('date').reverse()
     request = Request.objects.filter(carsharing=shared)
