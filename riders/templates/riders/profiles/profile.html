@@ -1,0 +1,17 @@
+{% extends 'riders/base.html'%} {% load bootstrap3 %} {% load staticfiles %}{% block content %} <br>
+<div class="container" id="editprofiles">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{profile_pic.url}}" class="img-responsive" alt="Image">
+    </div>
+    <div class="col-md-6"><br>
+      <h2 class="btn btn-info text-center">Username: {{user.username}}</h2> <br>
+      <h4><a href="{% url 'riders:edit' user.username %}">Edit Profile</a></h4>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+  </div>
+</div>
+{% endblock %}

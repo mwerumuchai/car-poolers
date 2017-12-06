@@ -28,6 +28,7 @@ DEBUG =config('DEBUG',default=False,cast=bool)
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL ='/'
 
 # Application definition
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drivers',
+    'riders',
     'bootstrap3',
 ]
 
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'car_poolers.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

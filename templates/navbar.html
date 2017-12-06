@@ -38,16 +38,16 @@
           <!-- action="/" -->
           {% if user.is_authenticated %}
           <li>
-            <a href="{% url 'about'%}">About</a>
+            <a href="/drivers/" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
           </li>
           <li>
-            <a href="/accounts/register" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
+            <a href="/riders/" class='btn btn-default btn-sm' id="btncolor">SIGN IN AS RIDER</a>
           </li>
           <li>
             <a href="/">{{ user.username }}</a>
           </li>
           <li>
-            <a href="{% url 'profiles' user.username %}">Profile</a>
+            <a href="{% url 'riders:profiles' user.username %}">Profile</a>
           </li>
           <li>
             <a href="/logout">Logout</a>
@@ -57,10 +57,7 @@
             <a href="{% url 'about'%}">About</a>
           </li>
           <li>
-            <a href="/accounts/register" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
-          </li>
-          <li>
-            <a class='btn btn-primary btn-sm' href="/accounts/login">Login</a>
+            <a class='btn btn-primary btn-sm' href="/accounts/register">Register</a>
           </li>
           <li></li>
           {% endif %}
