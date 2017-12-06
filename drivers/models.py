@@ -13,22 +13,16 @@ import string as str
 #     ('not_specified' 'Not Specified'),
 # )
 
-class Profile(models.Model):
+class DriverProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.CharField(max_length=15, blank=True)
     bio = models.TextField(max_length=255, blank=True)
     email = models.EmailField()
     phone_number = PhoneNumberField(max_length=10, blank=True)
-    choices = (('Male', 'Male'), ('Female', 'Female'), ('Both', 'Both'))
-    sex = models.CharField(max_length=10, blank=False, choices=choices)
     location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateTimeField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to = 'photos/',blank=True)
-    user_choices = (('Driver', 'Driver'), ('Rider', 'Rider'))
-    user_type = models.CharField(max_length=10,blank=False, choices=user_choices)
+    profile_pic = models.ImageField(upload_to = 'driverphotos/',blank=True)
 
 
-    User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])
+    User.profile = property(lambda u: DriverProfile.objects.get_or_create(user=u)[0])
 
     def __str__(self):
         return self.user.username
@@ -37,7 +31,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
 
-        Profile.objects.create(user=instance)
+        DriverProfile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
@@ -53,7 +47,7 @@ def generate_id():
 class CarDetails(models.Model):
     make_of_car = models.CharField(max_length=255, blank=False)
     plates_number = models.CharField(max_length=10, blank=False)
-    model = models.CharField(max_length=255, blank=False)
+    car_model = models.CharField(max_length=255, blank=False)
     color = models.TextField(blank=False)
     no_of_seats = models.IntegerField(blank=False)
     picture = models.ImageField(upload_to = 'photos/',blank=False)
@@ -74,8 +68,8 @@ class CarSharing(models.Model):
     arrival_time = models.TimeField(max_length=255, blank=False)
     no_passengers = models.IntegerField(blank=False)
     ride_details = models.TextField(blank=False)
-    choices = (('Male', 'Male'), ('Female', 'Female'), ('Both', 'Both'))
-    sex = models.CharField(max_length=30, blank=False, choices=choices)
+    # choices = (('Male', 'Male'), ('Female', 'Female'), ('Both', 'Both'))
+    # sex = models.CharField(max_length=30, blank=False, choices=choices)
     cardetails = models.ForeignKey(CarDetails, on_delete=models.CASCADE)
     sharing_ended = models.BooleanField(default=False)
 
@@ -98,8 +92,8 @@ class Request(models.Model):
     def __str__(self):
         return self.pick_up_point
 
-class DriverProfile(models.Model):
-    driver = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField('photos/', blank=False)
-    current_location = models.CharField(max_length=100, blank=False)
-    destination = models.CharField(max_length=100,blank=False)
+# class DriverProfile(models.Model):
+#     driver = models.OneToOneField(User, on_delete=models.CASCADE)
+#     profile_pic = models.ImageField('photos/', blank=False)
+#     current_location = models.CharField(max_length=100, blank=False)
+#     destination = models.CharField(max_length=100,blank=False)
