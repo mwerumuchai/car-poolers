@@ -10,6 +10,6 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = RiderProfile
-        fields = ('profile_pic', 'bio', 'location', 'phone_number')
+        fields = ('profile_pic', 'location', 'phone_number')
 
         exclude = ['comment',]

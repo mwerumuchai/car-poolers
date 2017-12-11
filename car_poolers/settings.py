@@ -30,7 +30,14 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL ='/'
 
+# RATINGS
+STAR_RATINGS_RERATE = False
+# STAR_RATINGS_ANONYMOUS = True
+
 # Application definition
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,6 +49,7 @@ INSTALLED_APPS = [
     'drivers',
     'riders',
     'bootstrap3',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [

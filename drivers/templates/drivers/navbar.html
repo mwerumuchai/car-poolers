@@ -38,16 +38,19 @@
           <!-- action="/" -->
           {% if user.is_authenticated %}
           <li>
-            <a href="{% url 'about'%}">About</a>
+            <a href="{% url 'drivers:about'%}">About</a>
           </li>
           <!-- <li>
             <a href="/drivers/" class='btn btn-default btn-sm' id="btncolor">BECOME A DRIVER</a>
           </li> -->
           <li>
-            <a href="/">{{ user.username }}</a>
+            <a href="#">{{ user.username }}</a>
           </li>
           <li>
-            <a href="{% url 'profiles' user.username %}">Profile</a>
+            <a href="{% url 'drivers:driverprofile' request.user.username %}">Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'drivers:edit' request.user.username  %}">Edit Profile</a>
           </li>
           <li>
             <a href="/logout">Logout</a>

@@ -1,0 +1,28 @@
+{% extends 'drivers/vehicle/base.html' %} {% load bootstrap3 %} {% load static %} {% load ratings %}{% block content %} <br>
+<div class="container" id="editprofiles">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <img src="{{driverprofile.profile_pic.url}}" class="img-responsive" alt="Image">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <form action="{% url 'drivers:cardetails' user.username%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ car_form.as_p }}
+        <button type="submit" class='btn btn-primary'>Save Car Details</button>
+      </form>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h4>Username: {{user.username}}</h4>
+      <ul style="list-style-type:none">
+        <li>
+          <h4>{{cardetails.make_of_car}}</h4></li><br>
+        <li>{{cardetails.plates_number}}</li> <br>
+        <li>{{cardetails.car_model}}</li><br>
+        <li>{{cardetails.color}}</li><br>
+        <li>{{cardetails.picture}}</li><br>
+      </ul>
+    </div>
+
+  </div>
+  <hr>
+</div>
+{% endblock %}

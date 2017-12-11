@@ -47,15 +47,9 @@
             <a href="/">{{ user.username }}</a>
           </li>
           <li>
-            <a href="{% url 'riders:profiles' user.username %}">Profile</a>
-          </li>
-          <li>
             <a href="/logout">Logout</a>
           </li>
           {% else %}
-          <li>
-            <a href="{% url 'about'%}">About</a>
-          </li>
           <li>
             <a class='btn btn-primary btn-sm' href="/accounts/register">Register</a>
           </li>
