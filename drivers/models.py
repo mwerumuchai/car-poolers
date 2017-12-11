@@ -7,19 +7,14 @@ import datetime as dt
 from random import choices
 import string as str
 
-# Gender_Choices = (
-#     ('male','Male'),
-#     ('female' 'Female'),
-#     ('not_specified' 'Not Specified'),
-# )
-
 class DriverProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=255, blank=True)
     email = models.EmailField()
-    phone_number = PhoneNumberField(max_length=10, blank=True)
+    phone_number = PhoneNumberField(max_length=10, blank=True, null=True)
     location = models.CharField(max_length=30, blank=True)
     profile_pic = models.ImageField(upload_to = 'driverphotos/',blank=True)
+    # cardetails = models.ForeignKey(CarDetails, on_delete=models.CASCADE)
 
 
     User.profile = property(lambda u: DriverProfile.objects.get_or_create(user=u)[0])
@@ -48,14 +43,14 @@ class CarDetails(models.Model):
     make_of_car = models.CharField(max_length=255, blank=False)
     plates_number = models.CharField(max_length=10, blank=False)
     car_model = models.CharField(max_length=255, blank=False)
-    color = models.TextField(blank=False)
+    color = models.CharField(max_length=10,blank=False)
     no_of_seats = models.IntegerField(blank=False)
-    picture = models.ImageField(upload_to = 'photos/',blank=False)
+    picture = models.ImageField(upload_to = 'driverphotos/',blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
     def __str__(self):
-        return self.make_of_car + " " + self.model + " belonging to " + self.user.username
+        return self.make_of_car + " " + self.car_model + " belonging to " + self.user.username
 
 
 class CarSharing(models.Model):
@@ -68,8 +63,6 @@ class CarSharing(models.Model):
     arrival_time = models.TimeField(max_length=255, blank=False)
     no_passengers = models.IntegerField(blank=False)
     ride_details = models.TextField(blank=False)
-    # choices = (('Male', 'Male'), ('Female', 'Female'), ('Both', 'Both'))
-    # sex = models.CharField(max_length=30, blank=False, choices=choices)
     cardetails = models.ForeignKey(CarDetails, on_delete=models.CASCADE)
     sharing_ended = models.BooleanField(default=False)
 

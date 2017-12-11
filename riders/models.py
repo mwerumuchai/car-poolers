@@ -7,11 +7,6 @@ import datetime as dt
 from random import choices
 import string as str
 
-# Gender_Choices = (
-#     ('male','Male'),
-#     ('female' 'Female'),
-#     ('not_specified' 'Not Specified'),
-# )
 
 class RiderProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -19,14 +14,12 @@ class RiderProfile(models.Model):
     bio = models.TextField(max_length=255, blank=True)
     email = models.EmailField()
     phone_number = PhoneNumberField(max_length=10, blank=True)
-    # choices = (('Male', 'Male'), ('Female', 'Female'), ('Both', 'Both'))
-    # sex = models.CharField(max_length=10, blank=False, choices=choices)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateTimeField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to = 'riderphotos/',blank=True)
+    profile_pic = models.ImageField(upload_to = 'riderphotos/',blank=True,null=True)
 
 
-    # User.profile = property(lambda u: RiderProfile.objects.get_or_create(user=u)[0])
+    User.profile = property(lambda u: RiderProfile.objects.get_or_create(user=u)[0])
 
     def __str__(self):
         return self.user.username
@@ -47,3 +40,8 @@ def generate_id():
         n = 10
         random = str.ascii_uppercase + str.ascii_lowercase + str.digits
         return ''.join(choice(random) for _ in range(n))
+
+@property
+def profile_pic_url(self):
+    if self.profile_pic and hasattr(self.profile_pic, 'url'):
+        return self.profile_pic.url
