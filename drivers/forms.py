@@ -1,5 +1,5 @@
 from django import forms
-from .models import DriverProfile,Request,CarSharing
+from .models import DriverProfile,Request,CarSharing,CarDetails
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -23,3 +23,8 @@ class CarSharingForm(forms.ModelForm):
     class Meta:
         model = CarSharing
         fields =('start','destination','start_time','arrival_time')
+
+class CarDetailsForm(forms.ModelForm):
+    class Meta:
+        model = CarDetails
+        fields =('make_of_car','plates_number','car_model','color','picture')
