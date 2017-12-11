@@ -2,16 +2,44 @@
 <!-- block content -->
 {% block content %}
 <br>
-<div class="container">
+<div class="container" id="background">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-1">
       <!-- empty div -->
     </div>
     <div class="col-md-6">
-      <h2>testing</h2><br>
-      <p>
+      <img src="{% static 'img/simon-stratford-275355.jpg' %}" alt="image" width="100%">
+    </div>
+    <div class="col-md-5 text-left">
+      <h2>Unlocking cities</h2> <br>
+      <h3>Imagine a world with fewer, fuller cars</h3>
+      <h4>When was the last time you were stuck in traffic? Yesterday? A few hours ago? Our cities are home to millions of cars, and the truth is that our streets weren’t built to handle them all.
+        The good news is that we can all do something about it. Let’s #ridetogether and unlock our cities.</h4>
       </p>
+      <hr>
+      <ul style="list-style-type:none">
+        <li>
+          <h5>Drive and earn great money as an independent contractor. Get paid weekly just for helping our community of riders get rides around town. <br> Be your own boss and get paid in fares for driving on your own schedule.</h5>
+          <a href="/accounts/login" class='btn btn-default btn-sm' id="btncolor">SIGN IN AS DRIVER</a>
+        </li>
+      </ul>
+      <hr>
+      <ul style="list-style-type:none">
+        <li>
+          <h4>Want to share a ride with someone else? </h4>
+          <a href="/accounts/login" class='btn btn-default btn-sm' id="btncolor">SIGN IN AS AS RIDER</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid text-center">
+    <!-- footer -->
+    <div class="footer">
+      <span class="footer"><i class="fa fa-camera fa-4x" aria-hidden="true"></i></span>
+      <br>
+      <span class="copy-right"> ©2017 Mweru Muchai ~ Pool My ride</span>
     </div>
   </div>
 </div>
+
 {% endblock %}

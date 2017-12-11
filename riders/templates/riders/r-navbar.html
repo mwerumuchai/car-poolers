@@ -47,10 +47,10 @@
             <a href="#">{{ user.username }}</a>
           </li>
           <li>
-            <a href="{% url 'riders:profiles' user.username %}">Profile</a>
+            <a href="{% url 'riders:riderprofiles' request.user.username %}">Profile</a>
           </li>
           <li>
-            <a href="{% url 'riders:edit' user.username %}">Edit Profile</a>
+            <a href="{% url 'riders:edit' request.user.username  %}">Edit Profile</a>
           </li>
           <li>
             <a href="/logout">Logout</a>

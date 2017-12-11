@@ -1,4 +1,4 @@
-{% extends 'riders/base.html' %}{% load bootstrap3 %} {% load static %} {% block content %} <br>
+{% extends 'riders/profiles/base.html' %}{% load bootstrap3 %} {% load static %} {% block content %} <br>
 <div class="container" id="editprofiles">
   <div class="row">
     <div class="col-md-4">
@@ -14,7 +14,7 @@
       <a href="/profiles"><h2 class="btn text-center">{{user.username}}</h2></a>
       <hr>
       <form action="{% url 'riders:edit' user.username%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %} {{ user_form.as_p }} {{ profile_form.as_p }}
+        {% csrf_token %} {% bootstrap_form user_form %} {% bootstrap_form profile_form %}
         <button type="submit" class='btn btn-primary'>Save changes</button>
       </form>
     </div>
